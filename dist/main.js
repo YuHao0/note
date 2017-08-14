@@ -1,25 +1,43 @@
 'use strict';
 
-var _map = require('common/map.js');
-
-var _map2 = _interopRequireDefault(_map);
-
-var _app = require('app.vue');
-
-var _app2 = _interopRequireDefault(_app);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-new VueRouter({
-    routes: _map2.default,
-    linkActiveClass: 'active',
-    linkExactActiveClass: 'exact-active'
-});
-
-new Vue({
+var app = new Vue({
     el: '#app',
-    VueRouter: VueRouter,
-    render: function render(h) {
-        return h(_app2.default);
+    data: function data() {
+        return {
+            m: 111
+        };
+    },
+
+    methods: {
+        router: function router(url) {
+            getTpl('../src/components' + url + '/template.html', function (result) {
+                console.log(result);
+                history.pushState(null, null, url);
+            });
+        }
     }
 });
+function getTpl(url, callback) {
+    $.ajax({
+        type: "get",
+        url: url,
+        dataType: "html",
+        success: function success(result) {
+            console.log(result, 'success');
+            callback(result);
+        },
+        error: function error(result) {
+            console.log(result, 'error');
+        }
+    });
+}
+
+var cacheStateAndFireUrlChange = function cacheStateAndFireUrlChange() {
+    console.log(location.href);
+    return;
+    var url = location.hash.split('#/')[1];
+    !!url && getTpl('../HTML/' + url + '.html', function (result) {
+        $('#routerView').empty().append(result);
+    });
+};
+onpopstate = cacheStateAndFireUrlChange();

@@ -7,10 +7,15 @@
     <link rel="stylesheet" href="src/css/index.css">
 </head>
 <body>
-<div id="app"></div>
+<div id="app" class="app">
+    <a href="javascript:;" @click="router('/jsIssue')">js issue</a>
+    <div id="routerView" class="router-view">
+
+    </div>
+</div>
 <!-- built files will be auto injected -->
+<script type="text/javascript" src="lib/jquery-3.2.1.slim.js"></script>
 <script type="text/javascript" src="lib/vue.js"></script>
-<script type="text/javascript" src="lib/vue-router.js"></script>
-<script type="text/javascript" src="dist/main.js"></script>
+<script type="text/javascript" src="src/main.js"></script>
 </body>
 </html>

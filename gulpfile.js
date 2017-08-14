@@ -11,9 +11,9 @@ gulp.task('stylus', function () {
 });
 
 gulp.task("babel", function () {
-    return gulp.src("./src/**/*.js")// ES6 源码存放的路径
+    return gulp.src("./src/**/*.js")
         .pipe(babel())
-        .pipe(gulp.dest("dist")); //转换成 ES5 存放的路径
+        .pipe(gulp.dest("dist"));
 });
 
-gulp.task('default', []);
+gulp.task('default', ['babel', 'stylus']);
